@@ -3,9 +3,12 @@ import 'package:clean_one/feautures/carts/data/repository/cart_repositories_impl
 import 'package:clean_one/feautures/carts/domain/repository/cart_repositories.dart';
 import 'package:clean_one/feautures/carts/domain/usecase/add_cart_usecase.dart';
 import 'package:clean_one/feautures/carts/domain/usecase/all_cart_usecase.dart';
+import 'package:clean_one/feautures/carts/domain/usecase/deleteCart.dart';
 import 'package:clean_one/feautures/carts/domain/usecase/single_cart_usecase.dart';
 import 'package:clean_one/feautures/carts/presentation/providers/allCart/all_cart_notifiar.dart';
 import 'package:clean_one/feautures/carts/presentation/providers/allCart/all_cart_state.dart';
+import 'package:clean_one/feautures/carts/presentation/providers/deleteCart/deleteCartNotifiar.dart';
+import 'package:clean_one/feautures/carts/presentation/providers/deleteCart/deleteCartState.dart';
 import 'package:clean_one/feautures/carts/presentation/providers/single_cart/single_cart_notifiar.dart';
 import 'package:clean_one/feautures/carts/presentation/providers/single_cart/single_cart_state.dart';
 import 'package:dio/dio.dart';
@@ -30,6 +33,9 @@ final singleCartUseCaseProvider = Provider<SingleCartUsecase>((ref) {
 final addCartUseCaseProvider = Provider<AddCartUsecase>((ref) {
   return AddCartUsecase(repositories: ref.watch(cartRepositoryProvider));
 });
+final deleteCartUseCaseProvider = Provider<DeleteCartUsecase>((ref){
+  return DeleteCartUsecase(ref.watch(cartRepositoryProvider));
+});
 
 final allCartProvider =
     StateNotifierProvider<AllCartNotifiar, AllCartState>((ref) {
@@ -40,4 +46,7 @@ final singleCartProvider =
   return SingleCartNotifiar(
       singleCartUsecase: ref.watch(singleCartUseCaseProvider),
       addCartUsecase: ref.watch(addCartUseCaseProvider));
+});
+final deleteCartProvider = StateNotifierProvider<DeleteCartNotifier, DeleteCartState>((ref){
+  return DeleteCartNotifier(ref.watch(deleteCartUseCaseProvider));
 });

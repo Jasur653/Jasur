@@ -1,5 +1,7 @@
 import 'package:clean_one/core/route_names.dart';
+import 'package:clean_one/feautures/carts/presentation/pages/add_cart_page.dart';
 import 'package:clean_one/feautures/carts/presentation/pages/all_cart_page.dart';
+import 'package:clean_one/feautures/carts/presentation/pages/deletePage.dart';
 import 'package:clean_one/feautures/carts/presentation/pages/single_cart_page.dart';
 import 'package:clean_one/feautures/product/presentation/pages/add_product_page.dart';
 import 'package:clean_one/feautures/product/presentation/pages/category_page.dart';
@@ -32,6 +34,10 @@ class AppRoute {
         return MaterialPageRoute(builder: (_) => const AllCartPage());
       case RouteNames.singleCartPage:
         return MaterialPageRoute(builder: (_) => const SingleCartPage());
+      case RouteNames.addCartPage:
+        return MaterialPageRoute(builder: (_) => const AddCartPage());
+      case RouteNames.deleteCartPage:
+        return MaterialPageRoute(builder: (_) => const DeleteCartPage());
       default:
         return _errorRoute();
     }

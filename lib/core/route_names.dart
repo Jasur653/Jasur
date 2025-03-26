@@ -7,5 +7,9 @@ class RouteNames {
   static const String addCategoryPage = '/add_category_page';
   static const String allCartPage = '/all_cart_page';
   static const String singleCartPage = '/single_cart_page';
+  static const String addCartPage = '/add_cart_page';
+  static const String deleteCartPage = '/delete_cart_page';
+
+
 
 }

@@ -1,6 +1,6 @@
 class SingleCart {
   final int id;
-  final List<Product> products;
+  final List<ProductOne> products;
   final double total;
   final double discountedTotal;
   final int userId;
@@ -18,7 +18,7 @@ class SingleCart {
   });
 }
 
-class Product {
+class ProductOne {
   final int id;
   final String title;
   final double price;
@@ -28,7 +28,7 @@ class Product {
   final double discountedTotal;
   final String thumbnail;
 
-  Product({
+  ProductOne({
     required this.id,
     required this.title,
     required this.price,

@@ -1,3 +1,4 @@
+import 'package:clean_one/core/route_names.dart';
 import 'package:clean_one/feautures/carts/presentation/providers/allCart/all_cart_state.dart';
 import 'package:clean_one/feautures/carts/presentation/providers/providers.dart';
 import 'package:flutter/material.dart';
@@ -10,11 +11,9 @@ class AllCartPage extends ConsumerStatefulWidget {
   ConsumerState createState() => _AllCartPageState();
 }
 
-
-
 class _AllCartPageState extends ConsumerState<AllCartPage> {
-  void getAllCart(){
-  ref.read(allCartProvider.notifier).allCart();
+  void getAllCart() {
+    ref.read(allCartProvider.notifier).allCart();
   }
 
   @override
@@ -24,6 +23,7 @@ class _AllCartPageState extends ConsumerState<AllCartPage> {
       getAllCart();
     });
   }
+
   @override
   Widget build(BuildContext context) {
     final allCartState = ref.watch(allCartProvider);
@@ -34,7 +34,9 @@ class _AllCartPageState extends ConsumerState<AllCartPage> {
         backgroundColor: Colors.green,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, RouteNames.addCartPage);
+            },
             icon: Icon(
               Icons.arrow_right_alt_outlined,
               color: Colors.black,
@@ -59,20 +61,19 @@ class _AllCartPageState extends ConsumerState<AllCartPage> {
                 child: ListView.builder(
                     itemCount: allCartState.carts.carts.length,
                     itemBuilder: (context, index) {
-                      final getallCart = allCartState.carts
-                      .carts[index];
+                      final getallCart = allCartState.carts.carts[index];
 
                       return ListTile(
                         leading: CircleAvatar(
-                            child: Column(
-                              children: [
-                                Text(getallCart.id.toString(), style: TextStyle(
-                                    fontSize: 22, fontWeight: FontWeight.bold),),
-                                
-                              ],
-                            ),
-
-
+                          child: Column(
+                            children: [
+                              Text(
+                                getallCart.id.toString(),
+                                style: TextStyle(
+                                    fontSize: 22, fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
                         ),
                       );
                     }),

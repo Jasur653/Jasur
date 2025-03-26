@@ -19,8 +19,15 @@ class CartRepositoriesImpl implements CartRepositories{
   }
 
   @override
-  Future<SingleCart> addCart({required int userId, required List<SingleCartModel> products}) {
-   return remoteDataSource.addCart(userId: userId, products: products);
+  Future<SingleCart> addCart({required SingleCartModel singleCartModel}) {
+    return remoteDataSource.addCart(singleCartModel: singleCartModel);
   }
+
+  @override
+  Future<ProductOne> deleteCart({required int id}) {
+   return remoteDataSource.deleteCart(id: id);
+  }
+
+
 
 }

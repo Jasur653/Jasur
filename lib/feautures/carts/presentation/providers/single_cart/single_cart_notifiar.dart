@@ -4,6 +4,8 @@ import 'package:clean_one/feautures/carts/domain/usecase/single_cart_usecase.dar
 import 'package:clean_one/feautures/carts/presentation/providers/single_cart/single_cart_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../data/model/cart_model.dart';
+
 class SingleCartNotifiar extends StateNotifier<SingleCartState> {
   final SingleCartUsecase singleCartUsecase;
   final AddCartUsecase addCartUsecase;
@@ -23,10 +25,10 @@ class SingleCartNotifiar extends StateNotifier<SingleCartState> {
   }
 
   Future<void> addCart(
-      {required int userId, required List<SingleCartModel>products}) async {
+       SingleCartModel singleCartModel) async {
     state = SingleCartLoading();
     try {
-      final addCarts = await addCartUsecase(userId: userId,products: products);
+      final addCarts = await addCartUsecase(singleCartModel: singleCartModel);
       state = SingleCartLoaded(addCarts);
     } catch (e) {
       state = SingleCartError(e.toString());

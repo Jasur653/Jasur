@@ -8,8 +8,8 @@ import '../../domain/entities/cart.dart';
 abstract class CartRemoteDataSource {
   Future<CartsModel> gatAllCart();
   Future<SingleCartModel> singleCart({required int id});
-  Future<SingleCartModel> addCart(
-      {required int userId,required List<SingleCartModel> products});
+  Future<SingleCartModel> addCart({required SingleCartModel singleCartModel});
+  Future<ProductSingleModel> deleteCart({required int id});
 }
 
 class CartRemoteDataSourceImpl extends CartRemoteDataSource {
@@ -40,30 +40,33 @@ class CartRemoteDataSourceImpl extends CartRemoteDataSource {
   }
 
   @override
-  Future<SingleCartModel> addCart({required int userId, required List<SingleCartModel> products}) async{
-
-      final requestData = {
-        'userId': userId,
-        'products': products.map((product) => {
-          'id': product.id,
-          'quantity': product.totalQuantity,
-        }).toList(),
-      };
-
-      final response = await dio.post(
-        'https://dummyjson.com/carts/add',
-        data: requestData,
-        options: Options(
-          headers: {'Content-Type': 'application/json'},
-        ),
-      );
-
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        return SingleCartModel.fromJson(response.data);
-      } else {
-        throw Exception('Failed to add cart: ${response.statusCode}');
-      }
+  Future<SingleCartModel> addCart({required SingleCartModel singleCartModel}) async{
+    final response = await dio.post(
+      'https://dummyjson.com/carts/add',
+      data: singleCartModel.toJson(),
+      options: Options(headers: {'Content-Type': 'application/json'}),
+    );
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      return SingleCartModel.fromJson(response.data);
+    } else {
+      throw Exception("Failed to get one product");
     }
+  }
+
+  @override
+  Future<ProductSingleModel> deleteCart({required int id})async {
+    final response = await dio.get(
+      'https://dummyjson.com/carts/$id',
+      options: Options(headers: {'Content-Type': 'application/json'}),
+    );
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      return ProductSingleModel.fromJson(response.data);
+    } else {
+      throw Exception("Failed to get one product");
+    }
+  }
+
+
   }
 
 

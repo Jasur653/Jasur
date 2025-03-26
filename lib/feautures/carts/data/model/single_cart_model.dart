@@ -3,7 +3,7 @@ import '../../domain/entities/cart.dart';
 class SingleCartModel extends SingleCart {
   SingleCartModel({
     required int id,
-    required List<Product> products,
+    required List<ProductOne> products,
     required double total,
     required double discountedTotal,
     required int userId,
@@ -47,7 +47,7 @@ class SingleCartModel extends SingleCart {
   }
 }
 
-class ProductSingleModel extends Product {
+class ProductSingleModel extends ProductOne {
   ProductSingleModel({
     required int id,
     required String title,
